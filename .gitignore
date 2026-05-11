@@ -4,3 +4,4 @@ node_modules/
 *.log
 AGENTS.md
 .hash256-miner-new/
+h98-accounts.txt

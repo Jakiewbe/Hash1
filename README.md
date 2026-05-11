@@ -35,3 +35,25 @@ npm run check
 ## 安全说明
 
 不要把主钱包私钥放进脚本。建议新建挖矿钱包，只保留够付 gas 的 ETH。
+
+## H98 / h98hash.xyz
+
+H98 script reads the public mining state from `https://www.h98hash.xyz/`, searches a
+`bytes16 nonce` where `SHA-256(challengeFor(address) + nonce)` satisfies the
+current leading-zero-bit difficulty, then submits `mint(bytes16)` for the winning
+account.
+
+```powershell
+npm run h98:check
+npm run h98
+npm run h98:gpu
+```
+
+The H98 scripts live in `h98/`. `npm run h98:gpu` starts the local WebGPU miner at `http://127.0.0.1:8798`.
+The browser searches proofs on the GPU, and the Node server submits the winning
+`mint(bytes16)` transaction for the matching loaded account.
+
+For multiple accounts, put one private key per line in `h98-accounts.txt`, or set
+`H98_PRIVATE_KEYS` in `.env` with comma or space separated keys. The H98 script
+only reads `H98_PRIVATE_KEYS` / `h98-accounts.txt`; it does not reuse the
+HASH256 `PRIVATE_KEY`.
