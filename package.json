@@ -1,0 +1,14 @@
+{
+  "name": "hash256-auto-miner",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "mine": "node mine.mjs",
+    "check": "node mine.mjs --status --no-submit",
+    "dashboard": "node dashboard.mjs"
+  },
+  "dependencies": {
+    "viem": "^2.39.3"
+  }
+}
