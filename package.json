@@ -10,7 +10,12 @@
     "gpu": "node gpu.mjs",
     "h98": "node h98/h98.mjs",
     "h98:check": "node h98/h98.mjs --status",
-    "h98:gpu": "node h98/h98-gpu.mjs"
+    "h98:gpu": "node h98/h98-gpu.mjs",
+    "equium": "powershell -ExecutionPolicy Bypass -File equium/run-equium.ps1",
+    "equium:setup": "powershell -ExecutionPolicy Bypass -File equium/run-equium.ps1 -BuildOnly",
+    "equium:validate": "powershell -ExecutionPolicy Bypass -File equium/run-equium.ps1 -ValidateKeypairs",
+    "equium:status": "powershell -ExecutionPolicy Bypass -File equium/run-equium.ps1 -Status",
+    "equium:stop": "powershell -ExecutionPolicy Bypass -File equium/run-equium.ps1 -Stop"
   },
   "dependencies": {
     "viem": "^2.39.3"

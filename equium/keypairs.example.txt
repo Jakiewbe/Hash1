@@ -1,0 +1,7 @@
+# One Solana keypair entry per line.
+# Copy this file to equium/keypairs.txt and edit it.
+# Preferred: Solana CLI keypair JSON path.
+C:\Users\you\.config\solana\id.json
+
+# Also accepted: inline JSON array or base58 Solana keypair.
+# Keep equium/keypairs.txt private. It is ignored by git.

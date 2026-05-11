@@ -57,3 +57,21 @@ For multiple accounts, put one private key per line in `h98-accounts.txt`, or se
 `H98_PRIVATE_KEYS` in `.env` with comma or space separated keys. The H98 script
 only reads `H98_PRIVATE_KEYS` / `h98-accounts.txt`; it does not reuse the
 HASH256 `PRIVATE_KEY`.
+
+## Equium / equium.xyz
+
+Equium uses Solana and Equihash 96,5. The scripts in `equium/` wrap the
+official Rust CLI miner from `HannaPrints/equium`; they do not reimplement the
+solver.
+
+```powershell
+npm run equium:setup
+npm run equium
+npm run equium:status
+```
+
+Add Solana keypair entries to `equium/keypairs.txt`; paths to Solana keypair
+JSON files are preferred, and inline JSON arrays or base58 keypairs are also
+accepted. For multi-account or multi-core mining, set
+`EQUIUM_WORKERS_PER_KEYPAIR`; expected wins follow total CPU hashrate, not
+account count by itself.

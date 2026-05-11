@@ -5,3 +5,10 @@ node_modules/
 AGENTS.md
 .hash256-miner-new/
 h98-accounts.txt
+.equium-miner/
+equium/keypairs.txt
+equium-home.html.tmp
+equium-mine.html.tmp
+equium-index.js.tmp
+.equium-upstream.tmp/
+.equium-upstream.tmp.zip
