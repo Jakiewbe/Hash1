@@ -6,7 +6,8 @@
   "scripts": {
     "mine": "node mine.mjs",
     "check": "node mine.mjs --status --no-submit",
-    "dashboard": "node dashboard.mjs"
+    "dashboard": "node dashboard.mjs",
+    "gpu": "node gpu.mjs"
   },
   "dependencies": {
     "viem": "^2.39.3"

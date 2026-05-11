@@ -12,6 +12,7 @@ import {
   formatUnits,
   http,
   parseAbi,
+  parseGwei,
 } from "viem";
 import { mainnet } from "viem/chains";
 import { privateKeyToAccount } from "viem/accounts";
@@ -85,6 +86,12 @@ function boolEnv(name, fallback = false) {
   const value = process.env[name];
   if (value == null || value === "") return fallback;
   return ["1", "true", "yes", "on"].includes(value.toLowerCase());
+}
+
+function optionalGweiEnv(name) {
+  const value = process.env[name]?.trim();
+  if (!value) return undefined;
+  return parseGwei(value);
 }
 
 async function ensureMinerRuntime() {
@@ -213,6 +220,7 @@ async function main() {
   const args = new Set(process.argv.slice(2));
   const statusOnly = args.has("--status");
   const rpcUrl = process.env.RPC_URL || "https://ethereum-rpc.publicnode.com";
+  const submitRpcUrl = process.env.SUBMIT_RPC_URL || process.env.PRIVATE_RPC_URL || rpcUrl;
   const keepMining = boolEnv("KEEP_MINING") && !args.has("--once");
   const noSubmit = args.has("--no-submit");
   const privateKey = process.env.PRIVATE_KEY?.trim();
@@ -227,14 +235,17 @@ async function main() {
   const batchSize = Number(process.env.BATCH_SIZE || 250000);
   const retargetSeconds = Number(process.env.RETARGET_SECONDS || 3);
   const fastSubmit = boolEnv("FAST_SUBMIT");
+  const priorityFee = optionalGweiEnv("PRIORITY_FEE_GWEI");
+  const maxFee = optionalGweiEnv("MAX_FEE_GWEI");
   const publicClient = createPublicClient({ chain: mainnet, transport: http(rpcUrl) });
   const walletClient = account && !noSubmit
-    ? createWalletClient({ account, chain: mainnet, transport: http(rpcUrl) })
+    ? createWalletClient({ account, chain: mainnet, transport: http(submitRpcUrl) })
     : null;
 
   console.log(`contract ${CONTRACT}`);
   console.log(`miner   ${minerAddress}`);
   console.log(`rpc     ${rpcUrl}`);
+  console.log(`submit  ${submitRpcUrl}`);
   console.log(`workers ${workers}, batch ${batchSize.toLocaleString()}`);
 
   while (true) {
@@ -308,6 +319,8 @@ async function main() {
       functionName: "mine",
       args: [nonce],
       gas: gasLimit,
+      ...(priorityFee ? { maxPriorityFeePerGas: priorityFee } : {}),
+      ...(maxFee ? { maxFeePerGas: maxFee } : {}),
     });
     console.log(`submitted ${tx}`);
     const receipt = await publicClient.waitForTransactionReceipt({ hash: tx });

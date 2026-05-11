@@ -22,6 +22,7 @@ npm run check
 ## 配置
 
 - `RPC_URL`: Ethereum mainnet RPC，建议使用自己的 Alchemy/Infura/QuickNode 等节点。
+- `SUBMIT_RPC_URL`: 可选，专门用于广播 `mine()` 交易的私有 RPC，例如 `https://rpc.mevblocker.io/fast` 或 `https://rpc.flashbots.net/fast`。
 - `PRIVATE_KEY`: 可选；填写后脚本会自动提交 `mine(nonce)` 交易。
 - `MINER_ADDRESS`: 没有私钥时必填，用于读取 `getChallenge(address)`。
 - `KEEP_MINING=1`: 持续等待开放，并在交易成功后继续下一轮。
@@ -29,6 +30,7 @@ npm run check
 - `BATCH_SIZE`: 每个 worker 每批搜索次数，默认 `250000`。
 - `RETARGET_SECONDS`: 搜索中检测链上 challenge/difficulty 是否变化的间隔，默认 `3` 秒。
 - `FAST_SUBMIT=1`: 找到 nonce 后跳过最终 freshness 检查和 gas 估算，提交更快，但如果 nonce 已过期可能白烧 gas。
+- `PRIORITY_FEE_GWEI` / `MAX_FEE_GWEI`: 可选 EIP-1559 手动费用，用于提高交易排序；竞争激烈时低 priority fee 很容易进块靠后。
 
 ## 安全说明
 

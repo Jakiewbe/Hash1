@@ -3,3 +3,4 @@ node_modules/
 .hash256-miner/
 *.log
 AGENTS.md
+.hash256-miner-new/
