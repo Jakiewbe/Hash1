@@ -6,6 +6,7 @@ AGENTS.md
 .hash256-miner-new/
 h98-accounts.txt
 .equium-miner/
+.equium-watch/
 equium/keypairs.txt
 equium-home.html.tmp
 equium-mine.html.tmp

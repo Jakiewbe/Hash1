@@ -15,7 +15,8 @@
     "equium:setup": "powershell -ExecutionPolicy Bypass -File equium/run-equium.ps1 -BuildOnly",
     "equium:validate": "powershell -ExecutionPolicy Bypass -File equium/run-equium.ps1 -ValidateKeypairs",
     "equium:status": "powershell -ExecutionPolicy Bypass -File equium/run-equium.ps1 -Status",
-    "equium:stop": "powershell -ExecutionPolicy Bypass -File equium/run-equium.ps1 -Stop"
+    "equium:stop": "powershell -ExecutionPolicy Bypass -File equium/run-equium.ps1 -Stop",
+    "equium:watch": "powershell -ExecutionPolicy Bypass -File equium/watch-equium.ps1"
   },
   "dependencies": {
     "viem": "^2.39.3"

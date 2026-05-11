@@ -54,6 +54,7 @@ npm run equium
 npm run equium:setup
 npm run equium:status
 npm run equium:stop
+npm run equium:watch
 ```
 
 For one foreground miner:
@@ -61,6 +62,15 @@ For one foreground miner:
 ```powershell
 powershell -ExecutionPolicy Bypass -File equium/run-equium.ps1 -Foreground
 ```
+
+For unattended mining, use the watchdog:
+
+```powershell
+npm run equium:watch
+```
+
+It starts the miner wrapper, checks managed `equium-miner` processes every
+minute, and restarts them if they exit. Logs are written under `.equium-watch/`.
 
 ## Multi Account
 
