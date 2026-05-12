@@ -19,6 +19,36 @@ npm run mine
 npm run check
 ```
 
+## PFFT / pffthash.com
+
+PFFT script reads the live `pffthash.com` contract state, computes PoW locally with CPU
+workers, and optionally submits `freeMint(uint256 powNonce)` if you configure a
+dedicated private key.
+
+```powershell
+npm run pfft:check
+npm run pfft
+npm run pfft:gpu
+```
+
+Relevant `.env` keys:
+
+- `PFFT_RPC_URL`: mainnet RPC for reading state.
+- `PFFT_SUBMIT_RPC_URL`: optional submission RPC, preferably a private relay.
+- `PFFT_PRIVATE_KEY`: optional; when set, the script signs and submits `freeMint`.
+- `PFFT_MINER_ADDRESS`: required if `PFFT_PRIVATE_KEY` is empty.
+- `PFFT_KEEP_MINING=1`: keep restarting after success or stale challenge changes.
+- `PFFT_WORKERS`: CPU workers, default `min(8, cores - 1)`.
+- `PFFT_BATCH_SIZE`: per-worker attempts between progress yields.
+- `PFFT_RETARGET_SECONDS`: refresh interval for challenge / target changes.
+- `PFFT_PRIORITY_FEE_GWEI` / `PFFT_MAX_FEE_GWEI`: optional EIP-1559 overrides.
+- `PFFT_GPU_PORT`: local WebGPU page port, default `8790`.
+- `PFFT_GPU_NO_SUBMIT=1`: GPU mode only searches and verifies locally, without sending `freeMint`.
+
+`npm run pfft:gpu` starts a local WebGPU miner page at `http://127.0.0.1:8790`.
+Open it in current Chrome/Edge, click `Start GPU`, and the browser will search on
+GPU while the local Node server handles state reads and optional tx submission.
+
 ## 配置
 
 - `RPC_URL`: Ethereum mainnet RPC，建议使用自己的 Alchemy/Infura/QuickNode 等节点。

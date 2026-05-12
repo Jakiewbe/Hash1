@@ -6,6 +6,9 @@
   "scripts": {
     "mine": "node mine.mjs",
     "check": "node mine.mjs --status --no-submit",
+    "pfft": "node pfft/pfft.mjs",
+    "pfft:check": "node pfft/pfft.mjs --status --no-submit",
+    "pfft:gpu": "node pfft/pfft-gpu.mjs",
     "dashboard": "node dashboard.mjs",
     "gpu": "node gpu.mjs",
     "h98": "node h98/h98.mjs",
